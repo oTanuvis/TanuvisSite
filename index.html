@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanuvis.com</title>
+<link rel="icon" href="SiteICON.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #0a0a0d;
+    --ink-2: #131319;
+    --parchment: #e4c9c9;
+    --parchment-dim: #8f8080;
+    --ember: #d82a2a;
+    --ember-dim: #a9212166;
+    --teal: #3f6c6b;
+    --line: #22232d;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'Space Grotesk', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  body{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:64px 20px 80px;
+    position:relative;
+    overflow-x:hidden;
+  }
+
+  .ink-glow{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:
+      radial-gradient(600px 400px at 15% 10%, rgba(216, 42, 42, 0.07), transparent 60%),
+      radial-gradient(500px 500px at 85% 85%, rgba(63,108,107,0.09), transparent 60%);
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift{
+    0%{ transform: translateY(0px) scale(1); }
+    100%{ transform: translateY(20px) scale(1.05); }
+  }
+
+  .page{
+    position:relative;
+    z-index:1;
+    width:100%;
+    max-width:480px;
+  }
+
+  .avatar{
+    width:250px;
+    height:250px;
+    margin:0 auto 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .avatar img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+  }
+
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:32px;
+    text-align:center;
+    margin:0 0 6px;
+    letter-spacing:0.2px;
+    color:var(--parchment);
+  }
+
+  .tagline{
+    text-align:center;
+    color:var(--parchment-dim);
+    font-size:14.5px;
+    margin:0 0 40px;
+    letter-spacing:0.3px;
+  }
+
+  .tagline .cursor{
+    display:inline-block;
+    width:1px;
+    height:14px;
+    background:var(--ember);
+    margin-left:2px;
+    vertical-align:middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:36px 0 14px;
+    color:var(--parchment-dim);
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:'';
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  .links{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .btn{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:16px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    color:var(--parchment);
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    font-size:15.5px;
+    font-weight:500;
+    transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    overflow:hidden;
+  }
+
+  .btn:hover{
+    transform: translateY(-2px);
+    border-color:#33354a;
+    background:#181b26;
+  }
+
+  .btn:active{ transform: translateY(0); }
+
+  .btn .icon{
+    width:22px;
+    height:22px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .btn .icon svg{ width:100%; height:100%; }
+
+  .btn .label{ flex:1; }
+
+  .btn .arrow{
+    color:var(--parchment-dim);
+    font-size:16px;
+    transition: transform .18s ease;
+  }
+  .btn:hover .arrow{ transform: translateX(3px); color:var(--parchment); }
+
+  .btn.featured{
+    background: linear-gradient(120deg, #d82a2a, #9c1313);
+    border-color: transparent;
+    color:#120c05;
+    font-weight:600;
+    box-shadow: 0 14px 30px -14px rgba(216, 42, 42, 0.4);
+  }
+  .btn.featured .arrow{ color:#120505; opacity:0.7; }
+  .btn.featured::before{
+    content:'Ultimo vídeo';
+    position:absolute;
+    top:8px;
+    right:14px;
+    font-size:9.5px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:600;
+    opacity:0.65;
+  }
+  .btn.featured:hover{ transform: translateY(-2px) scale(1.008); }
+
+  .btn:not(.featured)::after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    width:0;
+    height:0;
+    border-style:solid;
+    border-width:0 0 0 0;
+    border-color: transparent transparent var(--ember) transparent;
+    transition: border-width .18s ease;
+  }
+  .btn:not(.featured):hover::after{
+    border-width:0 0 16px 16px;
+  }
+
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin-top:30px;
+  }
+
+  .social{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    color:var(--parchment-dim);
+    transition: transform .18s ease, color .18s ease, border-color .18s ease;
+  }
+  .social svg{ width:19px; height:19px; }
+  .social:hover{
+    transform: translateY(-3px);
+    color:var(--ember);
+    border-color:#33354a;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:48px;
+    font-size:12px;
+    color:#4b4e5c;
+    letter-spacing:0.3px;
+  }
+
+  @media (max-width:400px){
+    h1{ font-size:27px; }
+    .btn{ padding:14px 16px; font-size:14.5px; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--ember);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ink-glow{ animation:none; }
+    .tagline .cursor{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ink-glow"></div>
+
+<div class="page">
+
+  <div class="avatar">
+    <img src="logo.png" alt="Logo do canal">
+  </div>
+
+  <p class="tagline">Mais de uma paranóia acumulada<span class="cursor"></span></p>
+
+  <div class="eyebrow">My Abell 2029</div>
+
+  <div class="links">
+
+    <a class="btn featured" href="#" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </span>
+      <span class="label">Vídeo do canal</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="btn" href="https://www.youtube.com/@Tanuvis" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+      </span>
+      <span class="label">Youtube</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="btn" href="#" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+      </span>
+      <span class="label">Em Breve</span>
+      <span class="arrow">→</span>
+    </a>
+
+    <a class="btn" href="mailto:contato@tanuvis.com" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      </span>
+      <span class="label">Entre em contato</span>
+      <span class="arrow">→</span>
+    </a>
+
+  </div>
+
+  <div class="eyebrow">redes sociais</div>
+
+  <div class="socials">
+
+    <a class="social" href="https://instagram.com/otanuvis/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+    </a>
+
+    <a class="social" href="https://x.com/oTanuvis" target="_blank" rel="noopener" aria-label="Twitter / X">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22H16.9l-5-6.5L6.1 22H3l8.1-9.3L2.9 2h6.5l4.5 6z"></path></svg>
+    </a>
+
+    <a class="social" href="https://tanuvis.itch.io/" target="_blank" rel="noopener" aria-label="Itch.io">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8c1.5 2 4 2 5.5 0 1 2 3.5 2 4.5 0 1 2 3.5 2 4.5 0 1.5 2 4 2 5.5 0"></path><path d="M3 8l1-4h16l1 4"></path><path d="M4 8v11a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V8"></path><line x1="9" y1="13" x2="15" y2="13"></line></svg>
+    </a>
+
+  </div>
+
+  <footer>Mais Um</footer>
+
+</div>
+
+</body>
+</html>

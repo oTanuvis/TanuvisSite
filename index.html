@@ -81,17 +81,6 @@
     width:9px; height:46px; background:var(--red); border-radius:0 0 6px 6px;
   }
   .blocks i.d.o::after{ top:calc(100% + 4px); }
-  .avatar{
-    position:absolute; left:50%; top:56px;
-    width:var(--avatar); height:var(--avatar);
-    transform:translateX(-50%);
-    z-index:2;
-  }
-  .avatar img{
-    width:100%; height:100%; object-fit:contain; display:block;
-    filter:grayscale(1) contrast(1.15);
-    mix-blend-mode:multiply;
-  }
   .tag{
     position:absolute; left:50%; top:46%;
     z-index:3; pointer-events:none;
@@ -173,8 +162,15 @@
     margin-top:48px;
     font-size:11px; letter-spacing:.5px;
   }
-  #barcode{ width:170px; height:40px; display:block; }
-  footer .code{ margin-top:4px; font-weight:700; }
+  .qr{
+    display:block; flex-shrink:0; width:105px; height:105px;
+    background:#fff; border:2.5px solid var(--ink);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .qr:hover{ transform:translate(-3px,-3px); box-shadow:5px 5px 0 var(--red); }
+  .qr svg{ display:block; width:100%; height:100%; }
+  .qr-text{ display:flex; flex-direction:column; align-items:flex-end; gap:8px; text-align:right; }
+  footer .code{ font-weight:700; }
   footer .more{ font-family:'Permanent Marker',cursive; font-size:20px; color:var(--red); transform:rotate(-4deg); }
 
   :focus-visible{ outline:3px solid var(--ink); outline-offset:3px; }
@@ -254,9 +250,6 @@
       <i class="o"></i><i></i><i></i><i class="d"></i>
       <i class="d"></i><i class="h"></i><i class="s"></i><i></i>
     </div>
-    <div class="avatar">
-      <img src="https://i.imgur.com/UYpV51L.png" alt="Logo do canal">
-    </div>
     <div class="tag" aria-hidden="true"><span class="w">Tanuvis</span><span class="k">Tanuvis</span></div>
   </header>
 
@@ -322,11 +315,13 @@
   </div>
 
   <footer>
-    <div>
-      <svg id="barcode" viewBox="0 0 170 40" preserveAspectRatio="none" aria-hidden="true"></svg>
-      <div class="code">TANUVIS A.K.A. @OTANUVIS</div>
+    <a class="qr" href="https://livepix.gg/tanuvis" target="_blank" rel="noopener" aria-label="Apoie o canal no Livepix">
+      <svg viewBox="0 0 33 33" shape-rendering="crispEdges" aria-hidden="true"><path fill="#080808" d="M4 4h7v1h-7zM14 4h1v1h-1zM18 4h2v1h-2zM22 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM13 5h1v1h-1zM18 5h3v1h-3zM22 5h1v1h-1zM28 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h1v1h-1zM15 6h1v1h-1zM19 6h1v1h-1zM22 6h1v1h-1zM24 6h3v1h-3zM28 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h1v1h-1zM16 7h1v1h-1zM19 7h1v1h-1zM22 7h1v1h-1zM24 7h3v1h-3zM28 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM13 8h1v1h-1zM16 8h4v1h-4zM22 8h1v1h-1zM24 8h3v1h-3zM28 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM14 9h3v1h-3zM18 9h2v1h-2zM22 9h1v1h-1zM28 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h7v1h-7zM12 11h1v1h-1zM15 11h1v1h-1zM17 11h2v1h-2zM20 11h1v1h-1zM4 12h3v1h-3zM8 12h5v1h-5zM16 12h2v1h-2zM19 12h4v1h-4zM26 12h1v1h-1zM5 13h1v1h-1zM7 13h3v1h-3zM11 13h1v1h-1zM13 13h1v1h-1zM15 13h4v1h-4zM21 13h2v1h-2zM28 13h1v1h-1zM4 14h2v1h-2zM9 14h4v1h-4zM14 14h3v1h-3zM20 14h1v1h-1zM24 14h1v1h-1zM26 14h3v1h-3zM4 15h1v1h-1zM6 15h3v1h-3zM13 15h2v1h-2zM16 15h2v1h-2zM19 15h1v1h-1zM24 15h1v1h-1zM27 15h1v1h-1zM9 16h2v1h-2zM12 16h1v1h-1zM14 16h4v1h-4zM19 16h1v1h-1zM21 16h2v1h-2zM25 16h1v1h-1zM27 16h2v1h-2zM5 17h3v1h-3zM9 17h1v1h-1zM11 17h1v1h-1zM14 17h2v1h-2zM17 17h1v1h-1zM20 17h1v1h-1zM22 17h1v1h-1zM25 17h1v1h-1zM28 17h1v1h-1zM4 18h1v1h-1zM6 18h3v1h-3zM10 18h1v1h-1zM13 18h1v1h-1zM18 18h1v1h-1zM21 18h3v1h-3zM26 18h3v1h-3zM5 19h1v1h-1zM7 19h1v1h-1zM12 19h3v1h-3zM17 19h3v1h-3zM21 19h2v1h-2zM24 19h1v1h-1zM27 19h1v1h-1zM4 20h2v1h-2zM7 20h1v1h-1zM10 20h5v1h-5zM17 20h1v1h-1zM19 20h7v1h-7zM12 21h2v1h-2zM16 21h1v1h-1zM19 21h2v1h-2zM24 21h2v1h-2zM27 21h2v1h-2zM4 22h7v1h-7zM12 22h1v1h-1zM17 22h1v1h-1zM19 22h2v1h-2zM22 22h1v1h-1zM24 22h2v1h-2zM27 22h2v1h-2zM4 23h1v1h-1zM10 23h1v1h-1zM12 23h4v1h-4zM17 23h1v1h-1zM20 23h1v1h-1zM24 23h2v1h-2zM27 23h2v1h-2zM4 24h1v1h-1zM6 24h3v1h-3zM10 24h1v1h-1zM12 24h1v1h-1zM15 24h3v1h-3zM20 24h6v1h-6zM4 25h1v1h-1zM6 25h3v1h-3zM10 25h1v1h-1zM14 25h1v1h-1zM16 25h4v1h-4zM23 25h4v1h-4zM4 26h1v1h-1zM6 26h3v1h-3zM10 26h1v1h-1zM12 26h3v1h-3zM16 26h1v1h-1zM20 26h1v1h-1zM24 26h1v1h-1zM28 26h1v1h-1zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM14 27h1v1h-1zM16 27h3v1h-3zM20 27h1v1h-1zM24 27h2v1h-2zM27 27h1v1h-1zM4 28h7v1h-7zM12 28h3v1h-3zM17 28h1v1h-1zM19 28h5v1h-5zM27 28h2v1h-2z"/></svg>
+    </a>
+    <div class="qr-text">
+      <div class="code">Escaneie pra apoiar o canal</div>
+      <span class="more">Mais Um</span>
     </div>
-    <span class="more">Mais Um</span>
   </footer>
 
 </main>
@@ -349,15 +344,6 @@
       g.appendChild(c);
     }
   });
-
-  // código de barras
-  var bc=document.getElementById('barcode'), r=rng(99), x=0, html='';
-  while(x<170){
-    var w=1+Math.floor(r()*4);
-    html+='<rect x="'+x+'" y="0" width="'+w+'" height="40" fill="#080808"/>';
-    x+=w+1+Math.floor(r()*3);
-  }
-  bc.innerHTML=html;
 })();
 </script>
 
